@@ -59,6 +59,11 @@ public enum ApiResponseStatus {
     INVALID_MEMBER(false, 2122, "로그인된 회원이 아닙니다."),
 
 
+    INVALID_REVIEW(false, 2221, "유효한 리뷰가 아닙니다"),
+    INVALID_MEMBER_AT_REVIEW_DELETE(false, 2261, "해당 회원이 쓴 리뷰가 아니기 때문에, 해당 회원은 이 리뷰를 지울 수 없습니다."),
+
+    FAIL_GET_ITEM_IMAGE(false, 2321, "복호화에 성공한 원본 경로에 저장된 이미지가 없습니다."),
+    INVALID_EXTENSION(false, 2341, "지원하지 않는 이미지 파일 형식 입니다."),
 
     /**
      * 3000 : Response 오류
@@ -67,8 +72,11 @@ public enum ApiResponseStatus {
     /**
      * 4000 : Database, Server 오류
      * */
-    INTERNAL_SERVER_ERROR(false, 4000, "예상하지 못한 예외가 발생하였습니다.");
-
+    INTERNAL_SERVER_ERROR(false, 4000, "예상하지 못한 예외가 발생하였습니다."),
+    FAIL_ENCRYPT(false, 4001, "AES256 암호화 과정에서 예와가 발생하였습니다."),
+    FAIL_DECRYPT(false, 4002, "AES256 복호화 과정에서 예외가 발생하였습니다."),
+    FAIL_GET_REVIEW_IMAGE(false, 4003, "이미지를 가져오는데 실패하였습니다."),
+    FAIL_SAVE_IMAGE(false, 4004, "이미지를 저장하는데 실패했습니다.");
 
 
     private final boolean isSuccess;

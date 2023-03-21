@@ -4,7 +4,6 @@ import lombok.*;
 import review.hairshop.common.enums.CurlyStatus;
 import review.hairshop.common.enums.Gender;
 import review.hairshop.common.enums.LengthStatus;
-import review.hairshop.common.enums.Screen;
 
 @Getter @Setter
 @NoArgsConstructor

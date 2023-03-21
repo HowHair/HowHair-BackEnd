@@ -19,11 +19,11 @@ public class Bookmark {
     @Column(name = "bookmark_id")
     private Long id;
 
-    @JoinColumn
+    @JoinColumn(name = "member_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
-    @JoinColumn
+    @JoinColumn(name = "review_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Review review;
 

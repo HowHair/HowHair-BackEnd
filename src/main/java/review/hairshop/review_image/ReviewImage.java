@@ -20,12 +20,12 @@ public class ReviewImage extends BasicEntity{
     @Column(name = "review_image_id")
     private Long id;
 
-    private String url;
+    private String path;
 
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @JoinColumn
+    @JoinColumn(name = "reveiw_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Review review;
 }

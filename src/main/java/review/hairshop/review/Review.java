@@ -5,10 +5,9 @@ import review.hairshop.bookmark.Bookmark;
 import review.hairshop.common.BasicEntity;
 import review.hairshop.common.enums.CurlyStatus;
 import review.hairshop.common.enums.LengthStatus;
-import review.hairshop.common.enums.Satisfaction;
+import review.hairshop.common.enums.RegYN;
 import review.hairshop.common.enums.Status;
-import review.hairshop.hair_style_mapping.HairStyleMapping;
-import review.hairshop.hair_type_mapping.HairTypeMapping;
+import review.hairshop.common.enums.surgery.*;
 import review.hairshop.member.Member;
 import review.hairshop.review_image.ReviewImage;
 
@@ -29,9 +28,7 @@ public class Review extends BasicEntity{
     @Column(name = "review_id")
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private Satisfaction satisfaction;
-
+    private int satisfaction;
 
     private String hairShopName;
     private String hairShopNumber;
@@ -47,13 +44,32 @@ public class Review extends BasicEntity{
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    @Enumerated(EnumType.STRING)
+    private HairCut hairCut;
+
+    @Enumerated(EnumType.STRING)
+    private Dyeing dyeing;
+
+    @Enumerated(EnumType.STRING)
+    private Perm perm;
+
+    @Enumerated(EnumType.STRING)
+    private Straightening straightening;
+
+    @Enumerated(EnumType.STRING)
+    private OtherSurgery otherSurgery;
+
+    @Enumerated(EnumType.STRING)
+    private RegYN regYN;
+
     private int price;
 
     private String content;
 
-    private LocalDate date;
+    private LocalDate surgeryDate;
 
-    @JoinColumn
+
+    @JoinColumn(name = "member_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
@@ -63,11 +79,6 @@ public class Review extends BasicEntity{
     @OneToMany(mappedBy = "review")
     private List<ReviewImage> reviewImageList = new LinkedList<>();
 
-    @OneToMany(mappedBy = "review")
-    private List<HairTypeMapping> hairTypeMappingList = new LinkedList<>();
-
-    @OneToMany(mappedBy = "review")
-    private List<HairStyleMapping> hairStyleMappings = new LinkedList<>();
 
     /**
      * [변경 메서드]
