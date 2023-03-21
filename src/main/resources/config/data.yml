@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://aws-rds.cyeqzizjffgt.ap-northeast-2.rds.amazonaws.com/hair_review
+    username: admin
+    password: kkt1326!

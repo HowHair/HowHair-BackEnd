@@ -1,8 +1,14 @@
 package review.hairshop.member.controller;
 
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import review.hairshop.common.response.ApiResponse;
 import review.hairshop.member.dto.MyPageParameterDto;
 import review.hairshop.member.dto.request.LoginRequestDto;
@@ -12,6 +18,7 @@ import review.hairshop.member.dto.response.*;
 import review.hairshop.member.service.MemberService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.Optional;
 
 import static review.hairshop.common.consts.SessionConst.MEMBER_ID;
@@ -22,9 +29,11 @@ public class MemberController {
 
     private final MemberService memberService;
 
+
     /**
      * [TEST API]
      * */
+
 
     /**
      * [API 1.] : 로그인

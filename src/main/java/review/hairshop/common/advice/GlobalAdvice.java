@@ -5,6 +5,7 @@ import org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededExceptio
 import org.apache.tomcat.util.http.fileupload.impl.SizeLimitExceededException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -21,7 +22,7 @@ import review.hairshop.common.response.validation.ValidationFail;
 import review.hairshop.common.response.validation.ValidationFailForField;
 import review.hairshop.common.response.validation.ValidationFailForObject;
 
-import java.net.BindException;
+
 import java.util.stream.Collectors;
 
 import static review.hairshop.common.response.ApiResponseStatus.INVALID_ENUM;
@@ -70,7 +71,7 @@ public class GlobalAdvice {
      *  Controller에서 이에 대한 에러 핸들링을 하지 않는 경우  -> BindException이 터진다 -> 그러면 이 ExceptionHandler까지 예외가 올라오고 , 여기서 일괄적으로 처리한다 */
     @ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ApiResponse bindExHandler(MethodArgumentNotValidException e, BindingResult bindingResult){
+    public ApiResponse bindExHandler(BindException e, BindingResult bindingResult){
         log.error("EXCEPTION = {}, INTERNAL_MESSAGE = {}", e, e.getMessage());
         ValidationFail validationFail = makeValidationError(bindingResult);
         return ApiResponse.failBeanValidation(validationFail);

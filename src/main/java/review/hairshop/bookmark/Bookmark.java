@@ -3,7 +3,7 @@ package review.hairshop.bookmark;
 import lombok.*;
 import review.hairshop.common.enums.Status;
 import review.hairshop.member.Member;
-import review.hairshop.review.Review;
+import review.hairshop.review_facade.review.Review;
 
 import javax.persistence.*;
 
@@ -19,11 +19,11 @@ public class Bookmark {
     @Column(name = "bookmark_id")
     private Long id;
 
-    @JoinColumn
+    @JoinColumn(name = "member_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Member member;
 
-    @JoinColumn
+    @JoinColumn(name = "review_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Review review;
 

@@ -1,0 +1,37 @@
+spring:
+  config:
+    import:
+      - classpath:/config/aws.yml
+      - classpath:/config/data.yml
+
+  servlet:
+    session:
+      tracking-modes : cookie
+      timeout : 3600
+
+    multipart:
+      max-file-size: 15MB
+      max-request-size: 100MB
+
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        #        show_sql: true
+        format_sql: true
+        default_batch_fetch_size: 100
+
+
+
+logging.level:
+  org.hibernate.SQL: debug
+#  org.hibernate.type: trace
+
+server:
+  port: 3000
+
+kakao:
+  url: https://kapi.kakao.com/v2/user/me
