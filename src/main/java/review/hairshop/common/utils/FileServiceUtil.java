@@ -5,7 +5,8 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
-import review.hairshop.review.dto.ReviewParameterDto;
+import review.hairshop.common.s3.S3ServiceUtil;
+import review.hairshop.review_facade.dto.ReviewParameterDto;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class FileServiceUtil {
 
-    private final S3Service s3Service;
+    private final S3ServiceUtil s3ServiceUtil;
 
     @Value("${cloud.aws.url}")
     private String url;
@@ -56,7 +57,7 @@ public class FileServiceUtil {
      * 2. [인자로 넘어온 path에 , 각 이미지 파일을 실제로 저장하는 서비스]
      * */
     public void uploadPahtList(List<String> pathList, ReviewParameterDto reviewParameterDto){
-        s3Service.uploadFileList(pathList, reviewParameterDto.getImageList());
+        s3ServiceUtil.uploadFileList(pathList, reviewParameterDto.getImageList());
     }
 
     /**

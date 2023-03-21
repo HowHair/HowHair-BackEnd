@@ -1,4 +1,4 @@
-package review.hairshop.review.service;
+package review.hairshop.review_facade.service;
 
 
 import lombok.RequiredArgsConstructor;
@@ -10,13 +10,13 @@ import review.hairshop.common.response.ApiException;
 import review.hairshop.common.utils.FileServiceUtil;
 import review.hairshop.member.Member;
 import review.hairshop.member.repository.MemberRepository;
-import review.hairshop.review.Review;
-import review.hairshop.review.dto.ReviewParameterDto;
-import review.hairshop.review.dto.response.DeleteReviewResponseDto;
-import review.hairshop.review.dto.response.ReviewResponseDto;
-import review.hairshop.review.repository.ReviewRepository;
-import review.hairshop.review_image.ReviewImage;
-import review.hairshop.review_image.repository.ReviewImageRepository;
+import review.hairshop.review_facade.review.Review;
+import review.hairshop.review_facade.dto.ReviewParameterDto;
+import review.hairshop.review_facade.dto.response.DeleteReviewResponseDto;
+import review.hairshop.review_facade.dto.response.ReviewResponseDto;
+import review.hairshop.review_facade.review.repository.ReviewRepository;
+import review.hairshop.review_facade.review_image.ReviewImage;
+import review.hairshop.review_facade.review_image.repository.ReviewImageRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;

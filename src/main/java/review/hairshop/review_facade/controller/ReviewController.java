@@ -1,19 +1,14 @@
-package review.hairshop.review.controller;
+package review.hairshop.review_facade.controller;
 
-import com.amazonaws.services.s3.model.S3Object;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import review.hairshop.common.response.ApiResponse;
-import review.hairshop.review.dto.ReviewParameterDto;
-import review.hairshop.review.dto.request.ReviewRequestDto;
-import review.hairshop.review.dto.response.DeleteReviewResponseDto;
-import review.hairshop.review.dto.response.ReviewResponseDto;
-import review.hairshop.review.service.ReviewService;
-
-import java.io.InputStreamReader;
+import review.hairshop.review_facade.dto.ReviewParameterDto;
+import review.hairshop.review_facade.dto.request.ReviewRequestDto;
+import review.hairshop.review_facade.dto.response.DeleteReviewResponseDto;
+import review.hairshop.review_facade.dto.response.ReviewResponseDto;
+import review.hairshop.review_facade.service.ReviewService;
 
 @RestController
 @RequiredArgsConstructor

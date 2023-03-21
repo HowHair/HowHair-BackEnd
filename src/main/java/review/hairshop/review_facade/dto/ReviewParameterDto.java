@@ -1,41 +1,41 @@
-package review.hairshop.review.dto.response;
+package review.hairshop.review_facade.dto;
 
 import lombok.*;
-import review.hairshop.common.enums.CurlyStatus;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 import review.hairshop.common.enums.LengthStatus;
-import review.hairshop.common.enums.RegYN;
 import review.hairshop.common.enums.surgery.*;
-
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
+@Getter @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ReviewResponseDto {
-    private Long reviewId;
+public class ReviewParameterDto {
+    private String hairShopName;
+
+    private String hairShopNumber;
+
+    private String hairShopAddress;
+
     private int satisfaction;
 
-    private String hairShopName;
-    private String hairShopNumber;
-    private String hairShopAddress;
-    private String designerName;
-
-    private int price;
-    private String content;
-    private LengthStatus lengthStatus;
-    private CurlyStatus curlyStatus;
     private LocalDate surgeryDate;
+
+    private String designerName;
 
     private HairCut hairCut;
     private Dyeing dyeing;
     private Perm perm;
     private Straightening straightening;
     private OtherSurgery otherSurgery;
-    private RegYN regYN;
+    private LengthStatus lengthStatus;
 
-    private List<String> imageUrlList;
+    private int price;
 
+    private String content;
+
+    private List<MultipartFile> imageList = new ArrayList<>();
 }

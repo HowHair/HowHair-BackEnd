@@ -7,7 +7,7 @@ import review.hairshop.common.enums.CurlyStatus;
 import review.hairshop.common.enums.Gender;
 import review.hairshop.common.enums.LengthStatus;
 import review.hairshop.common.enums.Status;
-import review.hairshop.review.Review;
+import review.hairshop.review_facade.review.Review;
 
 import javax.persistence.*;
 import java.util.LinkedList;

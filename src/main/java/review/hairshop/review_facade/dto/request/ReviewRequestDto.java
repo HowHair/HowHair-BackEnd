@@ -1,4 +1,4 @@
-package review.hairshop.review.dto.request;
+package review.hairshop.review_facade.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

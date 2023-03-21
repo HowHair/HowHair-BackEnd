@@ -1,0 +1,15 @@
+cloud:
+  aws:
+    # IAM 사용자 액세스, 비밀 키
+    credentials:
+      accessKey: AKIAWFB2UL6ZRAXEPR5J
+      secretKey: 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
+    s3:
+      # s3 버킷 이름
+      bucket: howhair
+    region:
+      # 지역
+      static: ap-northeast-2
+    stack:
+      auto: false
+    url : https://howhair.s3.ap-northeast-2.amazonaws.com

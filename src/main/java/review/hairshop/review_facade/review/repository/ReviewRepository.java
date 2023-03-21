@@ -1,9 +1,9 @@
-package review.hairshop.review.repository;
+package review.hairshop.review_facade.review.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import review.hairshop.common.enums.Status;
-import review.hairshop.review.Review;
+import review.hairshop.review_facade.review.Review;
 
 import java.util.Optional;
 

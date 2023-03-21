@@ -3,7 +3,7 @@ package review.hairshop.bookmark;
 import lombok.*;
 import review.hairshop.common.enums.Status;
 import review.hairshop.member.Member;
-import review.hairshop.review.Review;
+import review.hairshop.review_facade.review.Review;
 
 import javax.persistence.*;
 

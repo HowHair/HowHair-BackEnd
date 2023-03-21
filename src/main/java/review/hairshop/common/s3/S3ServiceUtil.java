@@ -1,8 +1,7 @@
-package review.hairshop.common.utils;
+package review.hairshop.common.s3;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.ObjectMetadata;
-import com.amazonaws.services.s3.model.S3Object;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -16,7 +15,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class S3Service {
+public class S3ServiceUtil {
 
     private final AmazonS3Client amazonS3Client;
 

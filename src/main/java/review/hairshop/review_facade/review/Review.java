@@ -1,4 +1,4 @@
-package review.hairshop.review;
+package review.hairshop.review_facade.review;
 
 import lombok.*;
 import review.hairshop.bookmark.Bookmark;
@@ -9,7 +9,7 @@ import review.hairshop.common.enums.RegYN;
 import review.hairshop.common.enums.Status;
 import review.hairshop.common.enums.surgery.*;
 import review.hairshop.member.Member;
-import review.hairshop.review_image.ReviewImage;
+import review.hairshop.review_facade.review_image.ReviewImage;
 
 import javax.persistence.*;
 import java.time.LocalDate;
