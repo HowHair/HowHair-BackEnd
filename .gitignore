@@ -35,3 +35,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### aws.yml과 data.yml 추가 ###
+/src/main/resources/config/aws.yml
+/src/main/resources/config/data.yml
