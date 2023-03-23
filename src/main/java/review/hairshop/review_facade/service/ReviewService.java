@@ -139,6 +139,7 @@ public class ReviewService {
                 .straightening(review.getStraightening())
                 .otherSurgery(review.getOtherSurgery())
                 .regYN(review.getMember().getId().equals(memberId) ? Y : N)
+                .numOfBookmark(CollectionUtils.isEmpty(review.getBookmarkList()) ? 0 : review.getBookmarkList().size())
                 .imageUrlList(imageUrlList)
                 .build();
     }
