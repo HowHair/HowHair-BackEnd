@@ -34,6 +34,7 @@ public class ReviewResponseDto {
     private Perm perm;
     private Straightening straightening;
     private OtherSurgery otherSurgery;
+    private int numOfBookmark;
     private RegYN regYN;
 
     private List<String> imageUrlList;
