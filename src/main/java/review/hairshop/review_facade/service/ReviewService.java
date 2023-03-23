@@ -18,6 +18,7 @@ import review.hairshop.review_facade.review.repository.ReviewRepository;
 import review.hairshop.review_facade.review_image.ReviewImage;
 import review.hairshop.review_facade.review_image.repository.ReviewImageRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,10 +38,6 @@ public class ReviewService {
     private final MemberRepository memberRepository;
     private final FileServiceUtil fileServiceUtil;
 
-    public Long getReviewId(Long reviewId){
-        Review review = reviewRepository.findByIdAndStatus(reviewId, ACTIVE).get();
-        return review.getId();
-    }
 
     @Transactional
     public ReviewResponseDto register(Long memberId, ReviewParameterDto reviewParameterDto){
@@ -63,14 +60,16 @@ public class ReviewService {
         }
 
         //2. ReviewImage 엔티티 생성하여 저장
-        List<String> pathList = fileServiceUtil.getPathList(reviewParameterDto, memberId, review.getId());
+        List<String> pathList = fileServiceUtil.getPathList(reviewParameterDto, review.getId());
         List<ReviewImage> reviewImageList = pathList.stream()
                                                     .map(p -> ReviewImage.builder().path(p).review(review).status(ACTIVE).build())
                                                     .collect(Collectors.toList());
         reviewImageRepository.saveAll(reviewImageList);
 
         //3. 실제 Review Image 파일 저장
-        fileServiceUtil.uploadPahtList(pathList, reviewParameterDto);
+        createList(0, pathList.size()).forEach(
+                idx -> fileServiceUtil.uploadImage(pathList.get(idx), reviewParameterDto.getImageList().get(idx))
+        );
 
         //4. 이후 실제 경로를 암호화 시킨 후 , ReviewResponseDto를 만들어서 반환
         List<String> imageUrlList = fileServiceUtil.getImageUrlList(pathList);
@@ -84,6 +83,15 @@ public class ReviewService {
                     throw new ApiException(INVALID_MEMBER, "로그인 된 회원이 아닙니다.");
                 }
         );
+    }
+
+    private List<Integer> createList(int from, int to){
+        List<Integer> list = new ArrayList<>();
+        for(int i=from; i<to; i++){
+            list.add(i);
+        }
+
+        return list;
     }
 
     /** [선택한 값에 따라 Review 엔티티를 생성하는 내부 서비스] */
@@ -106,7 +114,6 @@ public class ReviewService {
                 .perm(reviewParameterDto.getPerm())
                 .straightening(reviewParameterDto.getStraightening())
                 .otherSurgery(reviewParameterDto.getOtherSurgery())
-                .regYN(Y)
                 .member(member)
                 .build();
     }
@@ -139,15 +146,10 @@ public class ReviewService {
     /**-------------------------------------------------------------------------------------------------------------------------------------------- */
     public ReviewResponseDto getReview(Long memberId, Long reviewId){
 
-        //1. ACTIVE한 회원의 요청인지를 검사
-        if(!memberRepository.existsByIdAndStatus(memberId, ACTIVE)){
-            throw new ApiException(INVALID_MEMBER, "로그인 된 회원이 아닙니다.");
-        }
-
-        //2. ACTIVE한 리뷰를 조회
+        //1. ACTIVE한 리뷰를 조회
         Review findReview = getReview(reviewId, ACTIVE);
 
-        //3. 조회한 리뷰에 함꼐 등록된 사진이 1개라도 있는지의 여부에 따라 적절한 ReviewResponse를 생성하여 리턴
+        //2. 조회한 리뷰에 함꼐 등록된 사진이 1개라도 있는지의 여부에 따라 적절한 ReviewResponse를 생성하여 리턴
         if(CollectionUtils.isEmpty(findReview.getReviewImageList())){
             List<String> sampleUrlList = fileServiceUtil.getSampleUrlList();
             return createReviewResponse(memberId, findReview, sampleUrlList);
@@ -176,12 +178,8 @@ public class ReviewService {
     @Transactional
     public DeleteReviewResponseDto patchReview(Long memberId, Long reviewId){
 
-        //0_1. 로그인 한 회원의 요청인지 검사
-        if(!memberRepository.existsByIdAndStatus(memberId, ACTIVE)){
-            throw new ApiException(INVALID_MEMBER, "로그인 된 회원이 아닙니다.");
-        }
 
-        //0_2. ACTIVE 한 리뷰를 조회하여 , 그 리뷰의 작성자가 해당 요청을 보낸 member인지를 검사
+        //0. ACTIVE 한 리뷰를 조회하여 , 그 리뷰의 작성자가 해당 요청을 보낸 member인지를 검사
         Review findReview = getReview(reviewId, ACTIVE);
         if(!findReview.getMember().getId().equals(memberId)){
             throw new ApiException(INVALID_MEMBER_AT_REVIEW_DELETE, "해당 회원이 쓴 리뷰가 아니기 때문에, 해당 회원은 이 리뷰를 지울 수 없습니다.");

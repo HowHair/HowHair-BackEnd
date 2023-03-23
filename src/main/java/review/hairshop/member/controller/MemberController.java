@@ -81,9 +81,18 @@ public class MemberController {
      * [API 3.] : 회원 탈퇴
      * */
     @PatchMapping("/withdrawal")
-    public ApiResponse<WithdrawalResponseDto> withdrawal(@RequestAttribute Long memberId){
+    public ApiResponse<WithdrawalResponseDto> withdrawal(@RequestAttribute Long memberId, HttpServletRequest request){
 
-        return ApiResponse.success(memberService.withdrawal(memberId));
+        /** 1. INACTIVE 하게 만들고 */
+        WithdrawalResponseDto withdrawalResponseDto = memberService.withdrawal(memberId);
+
+        /** 2. 기존 세션만을 조회하여 */
+        HttpSession session = request.getSession(false);
+
+        /** 3. session 값이 존재한다면 (null이 아니라면) -> 그 세션을 제거한다 */
+        Optional.ofNullable(session).ifPresent(s -> s.invalidate());
+
+        return ApiResponse.success(withdrawalResponseDto);
     }
 
     /**

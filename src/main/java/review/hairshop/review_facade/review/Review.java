@@ -59,9 +59,6 @@ public class Review extends BasicEntity{
     @Enumerated(EnumType.STRING)
     private OtherSurgery otherSurgery;
 
-    @Enumerated(EnumType.STRING)
-    private RegYN regYN;
-
     private int price;
 
     private String content;
