@@ -36,10 +36,11 @@ public class FileServiceUtil {
     /**
      * 1. [file Original Name을 가지고 -> 실제 파일이 저장될 path들의 리스트를 생성하는 서비스]
      * */
-    public List<String> getPathList(ReviewParameterDto reviewParameterDto, Long memberId, Long reviewId){
+    public List<String> getPathList(ReviewParameterDto reviewParameterDto, Long reviewId){
 
         //1. 오늘 날짜에 대한 url 앞부분을 만들기
-        String today = LocalDate.now().getYear() + "_" + LocalDate.now().getMonth().getValue() + "_" + LocalDate.now().getDayOfMonth();
+        LocalDate now = LocalDate.now();
+        String today = now.getYear() + "_" + now.getMonth().getValue() + "_" + now.getDayOfMonth();
 
         //2. reviewId를 가지고 중간부분 만들기 (memberId를 노출시키는건 위험하다고 판단하여 노출시키지 않음)
         String reviewNumber = "review" + reviewId;
@@ -54,10 +55,10 @@ public class FileServiceUtil {
 
 
     /**
-     * 2. [인자로 넘어온 path에 , 각 이미지 파일을 실제로 저장하는 서비스]
+     * 2. [인자로 넘어온 path에 , 이미지 파일을 실제로 저장하는 서비스]
      * */
-    public void uploadPahtList(List<String> pathList, ReviewParameterDto reviewParameterDto){
-        s3ServiceUtil.uploadFileList(pathList, reviewParameterDto.getImageList());
+    public void uploadImage(String path, MultipartFile image){
+       s3ServiceUtil.uploadFile(path, image);
     }
 
     /**
