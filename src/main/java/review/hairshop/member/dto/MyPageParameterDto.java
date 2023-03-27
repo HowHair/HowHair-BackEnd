@@ -13,6 +13,5 @@ import review.hairshop.common.enums.LengthStatus;
 public class MyPageParameterDto {
 
     private Gender gender;
-    private LengthStatus lengthStatus;
     private CurlyStatus curlyStatus;
 }
