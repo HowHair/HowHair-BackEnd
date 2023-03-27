@@ -20,8 +20,6 @@ public class MyPageRequestDto {
 
     @NotNull(message = "성별은 필수 값 입니다.")
     private Gender gender;
-    @NotNull(message = "머리 기장은 필수 값 입니다.")
-    private LengthStatus lengthStatus;
     @NotNull(message = "곱슬 정도는 필수 값 입니다.")
     private CurlyStatus curlyStatus;
 }

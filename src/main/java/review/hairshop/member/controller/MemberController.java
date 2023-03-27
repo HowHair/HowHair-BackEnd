@@ -103,7 +103,6 @@ public class MemberController {
 
         MyPageParameterDto myPageParameterDto = MyPageParameterDto.builder()
                 .gender(myPageRequestDto.getGender())
-                .lengthStatus(myPageRequestDto.getLengthStatus())
                 .curlyStatus(myPageRequestDto.getCurlyStatus())
                 .build();
 
@@ -127,7 +126,6 @@ public class MemberController {
 
         MyPageParameterDto myPageParameterDto = MyPageParameterDto.builder()
                 .gender(myPageRequestDto.getGender())
-                .lengthStatus(myPageRequestDto.getLengthStatus())
                 .curlyStatus(myPageRequestDto.getCurlyStatus())
                 .build();
 

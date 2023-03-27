@@ -47,7 +47,7 @@ public class ReviewService {
             throw new ApiException(INVALID_EXTENSION, "지원하지 않는 이미지 파일 형식 입니다.");
         }
 
-        Member findMember = getMember(memberId);
+        Member findMember = getMember(memberId, ACTIVE);
 
         //1. Review 엔티티 생성하여 저장
         Review review = createReview(findMember, reviewParameterDto);
@@ -56,7 +56,7 @@ public class ReviewService {
         /** 만약 저장할 함께 넘어온 이미지가 하나도 없다면 그대로 리턴 */
         if(CollectionUtils.isEmpty(reviewParameterDto.getImageList())){
             List<String> sampleUrlList = fileServiceUtil.getSampleUrlList();
-            return createReviewResponse(memberId, review, sampleUrlList);
+            return createReviewResponse(findMember, review, sampleUrlList);
         }
 
         //2. ReviewImage 엔티티 생성하여 저장
@@ -73,12 +73,12 @@ public class ReviewService {
 
         //4. 이후 실제 경로를 암호화 시킨 후 , ReviewResponseDto를 만들어서 반환
         List<String> imageUrlList = fileServiceUtil.getImageUrlList(pathList);
-        return createReviewResponse(memberId, review, imageUrlList);
+        return createReviewResponse(findMember, review, imageUrlList);
     }
 
     /** [로그인 된 Member만을 가져오는 내부 서비스] */
-    private Member getMember(Long memberId){
-        return memberRepository.findByIdAndStatus(memberId, ACTIVE).orElseThrow(
+    private Member getMember(Long memberId, Status status){
+        return memberRepository.findByIdAndStatus(memberId, status).orElseThrow(
                 () -> {
                     throw new ApiException(INVALID_MEMBER, "로그인 된 회원이 아닙니다.");
                 }
@@ -120,7 +120,7 @@ public class ReviewService {
 
 
     /** [선택한 값에 따른 ReviewResponseDto를 생성하는 내부 서비스] : 넘어온 이미지가 있는 경우는*/
-    private ReviewResponseDto createReviewResponse(Long memberId, Review review, List<String> imageUrlList){
+    private ReviewResponseDto createReviewResponse(Member member, Review review, List<String> imageUrlList){
         return ReviewResponseDto.builder()
                 .reviewId(review.getId())
                 .satisfaction(review.getSatisfaction())
@@ -138,7 +138,9 @@ public class ReviewService {
                 .perm(review.getPerm())
                 .straightening(review.getStraightening())
                 .otherSurgery(review.getOtherSurgery())
-                .regYN(review.getMember().getId().equals(memberId) ? Y : N)
+                .memberName(member.getName())
+                .gender(member.getGender())
+                .regYN(review.getMember().getId().equals(member.getId()) ? Y : N)
                 .numOfBookmark(CollectionUtils.isEmpty(review.getBookmarkList()) ? 0 : review.getBookmarkList().size())
                 .imageUrlList(imageUrlList)
                 .build();
@@ -149,11 +151,12 @@ public class ReviewService {
 
         //1. ACTIVE한 리뷰를 조회
         Review findReview = getReview(reviewId, ACTIVE);
+        Member findMember = getMember(memberId, ACTIVE);
 
         //2. 조회한 리뷰에 함꼐 등록된 사진이 1개라도 있는지의 여부에 따라 적절한 ReviewResponse를 생성하여 리턴
         if(CollectionUtils.isEmpty(findReview.getReviewImageList())){
             List<String> sampleUrlList = fileServiceUtil.getSampleUrlList();
-            return createReviewResponse(memberId, findReview, sampleUrlList);
+            return createReviewResponse(findMember, findReview, sampleUrlList);
         }
 
         List<String> pathList = findReview.getReviewImageList().stream()
@@ -162,7 +165,7 @@ public class ReviewService {
 
         List<String> imageUrlList = fileServiceUtil.getImageUrlList(pathList);
 
-        return createReviewResponse(memberId, findReview, imageUrlList);
+        return createReviewResponse(findMember, findReview, imageUrlList);
     }
 
     private Review getReview(Long reviewId, Status status){

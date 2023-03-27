@@ -12,6 +12,5 @@ import review.hairshop.common.enums.LengthStatus;
 public class MyPageResponseDto {
     private String nickname;
     private Gender gender;
-    private LengthStatus lengthStatus;
     private CurlyStatus curlyStatus;
 }

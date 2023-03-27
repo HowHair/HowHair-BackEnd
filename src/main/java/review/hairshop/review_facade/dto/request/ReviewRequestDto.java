@@ -50,6 +50,7 @@ public class ReviewRequestDto {
     private Straightening straightening;
     @NotNull(message = "다른 시술 종류 선택은 필수 입니다.")
     private OtherSurgery otherSurgery;
+    @NotNull(message = "머리 길이는 필수 입니다.")
     private LengthStatus lengthStatus;
 
     @Min(value = 0, message = "최소 가격은 0원 입니다.")

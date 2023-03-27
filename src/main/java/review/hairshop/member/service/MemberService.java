@@ -17,16 +17,6 @@ import review.hairshop.member.dto.response.MyPageResponseDto;
 import review.hairshop.member.dto.response.NaverLocalResponseDto;
 import review.hairshop.member.dto.response.WithdrawalResponseDto;
 import review.hairshop.member.repository.MemberRepository;
-
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.apache.el.util.MessageFactory.get;
 import static review.hairshop.common.enums.Status.*;
 
 
@@ -128,7 +118,7 @@ public class MemberService {
         );
 
         //2. 넘어온 정보로 3가지 필드 업데이트
-        findMember.changeMemberInfo(myPageParameterDto.getGender(), myPageParameterDto.getLengthStatus(), myPageParameterDto.getCurlyStatus());
+        findMember.changeMemberInfo(myPageParameterDto.getGender(), myPageParameterDto.getCurlyStatus());
 
         //3. 이때 처음으로 회원 정보를 등록하는거면 -> findMember의 status가 ONGOING 이니까 ACTIVE로 변환
         if(findMember.getStatus().equals(Status.ONGOING)){
@@ -139,7 +129,6 @@ public class MemberService {
         return  MyPageResponseDto.builder()
                 .nickname(findMember.getName())
                 .gender(findMember.getGender())
-                .lengthStatus(findMember.getLengthStatus())
                 .curlyStatus(findMember.getCurlyStatus())
                 .build();
     }
@@ -153,14 +142,13 @@ public class MemberService {
         Member findMember = getMember(memberId);
 
         //2. 넘어온 정보로 3가지 필드 업데이트
-        findMember.changeMemberInfo(myPageParameterDto.getGender(), myPageParameterDto.getLengthStatus(), myPageParameterDto.getCurlyStatus());
+        findMember.changeMemberInfo(myPageParameterDto.getGender(), myPageParameterDto.getCurlyStatus());
 
 
         //3. 이후 업데이트 된 정보를 그대로 넘김
         return  MyPageResponseDto.builder()
                 .nickname(findMember.getName())
                 .gender(findMember.getGender())
-                .lengthStatus(findMember.getLengthStatus())
                 .curlyStatus(findMember.getCurlyStatus())
                 .build();
     }
@@ -176,7 +164,6 @@ public class MemberService {
         return MyPageResponseDto.builder()
                                 .nickname(findMember.getName())
                                 .gender(findMember.getGender())
-                                .lengthStatus(findMember.getLengthStatus())
                                 .curlyStatus(findMember.getCurlyStatus())
                                 .build();
     }
