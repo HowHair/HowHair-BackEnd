@@ -103,6 +103,7 @@ public class MemberController {
 
         MyPageParameterDto myPageParameterDto = MyPageParameterDto.builder()
                 .gender(myPageRequestDto.getGender())
+                .lengthStatus(myPageRequestDto.getLengthStatus())
                 .curlyStatus(myPageRequestDto.getCurlyStatus())
                 .build();
 
@@ -125,7 +126,7 @@ public class MemberController {
     public ApiResponse<MyPageResponseDto> patchMyPage(@RequestAttribute Long memberId, @Validated @RequestBody MyPageRequestDto myPageRequestDto){
 
         MyPageParameterDto myPageParameterDto = MyPageParameterDto.builder()
-                .gender(myPageRequestDto.getGender())
+                .lengthStatus(myPageRequestDto.getLengthStatus())
                 .curlyStatus(myPageRequestDto.getCurlyStatus())
                 .build();
 

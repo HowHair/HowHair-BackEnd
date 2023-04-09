@@ -30,7 +30,7 @@ public class ReviewParameterDto {
     private Dyeing dyeing;
     private Perm perm;
     private Straightening straightening;
-    private OtherSurgery otherSurgery;
+
     private LengthStatus lengthStatus;
 
     private int price;

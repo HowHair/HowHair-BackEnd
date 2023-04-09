@@ -32,8 +32,8 @@ public class MemberService {
     private final WebClientUtil webClientUtil;
 
 
-    private Member getMember(Long memberId){
-        Member findMember = memberRepository.findByIdAndStatus(memberId, ACTIVE).orElseThrow(
+    private Member getMember(Long memberId, Status status){
+        Member findMember = memberRepository.findByIdAndStatus(memberId, status).orElseThrow(
                 () -> {
                     throw new ApiException(ApiResponseStatus.INVALID_MEMBER, "로그인 된 회원이 아닙니다.");
                 }
@@ -87,7 +87,7 @@ public class MemberService {
     public WithdrawalResponseDto withdrawal(Long memberId){
 
         //1. 로그인 된 멤버 조회 후 (여기서 페치조인을 쓰면 안됨!)
-        Member findMember = getMember(memberId);
+        Member findMember = getMember(memberId, ACTIVE);
 
         /** (리뷰 이미지는 리뷰에 종속적이기 때문에, 리뷰만 INACTIVE하게 만든다면 , 그 리뷰를 통해 이미지에 접근할 일은 없으니 , 결과적으로 이미지는 따로 건들지 않음)*/
         //2_1. 이 Member가 작성한 리뷰들을 모두 INACTIVE 하게 만듦 (batch size로 100개씩 다시 리뷰들을 가져온 후 -> 이들을 INACTIVE 하게 업데이트)
@@ -118,7 +118,7 @@ public class MemberService {
         );
 
         //2. 넘어온 정보로 3가지 필드 업데이트
-        findMember.changeMemberInfo(myPageParameterDto.getGender(), myPageParameterDto.getCurlyStatus());
+        findMember.changeMemberInfo(myPageParameterDto.getGender(), myPageParameterDto.getLengthStatus(), myPageParameterDto.getCurlyStatus());
 
         //3. 이때 처음으로 회원 정보를 등록하는거면 -> findMember의 status가 ONGOING 이니까 ACTIVE로 변환
         if(findMember.getStatus().equals(Status.ONGOING)){
@@ -129,6 +129,7 @@ public class MemberService {
         return  MyPageResponseDto.builder()
                 .nickname(findMember.getName())
                 .gender(findMember.getGender())
+                .lengthStatus(findMember.getLengthStatus())
                 .curlyStatus(findMember.getCurlyStatus())
                 .build();
     }
@@ -139,16 +140,17 @@ public class MemberService {
     public MyPageResponseDto updateMyPage(Long memberId, MyPageParameterDto myPageParameterDto){
 
         //1. Member 조회 후
-        Member findMember = getMember(memberId);
+        Member findMember = getMember(memberId, ACTIVE);
 
-        //2. 넘어온 정보로 3가지 필드 업데이트
-        findMember.changeMemberInfo(myPageParameterDto.getGender(), myPageParameterDto.getCurlyStatus());
+        //2. 넘어온 정보로 2가지 필드 업데이트 (gender까지 들어오지만 -> gender는 업데이트 하지 않음!!!)
+        findMember.changeMemberInfo(myPageParameterDto.getLengthStatus(), myPageParameterDto.getCurlyStatus());
 
 
         //3. 이후 업데이트 된 정보를 그대로 넘김
         return  MyPageResponseDto.builder()
                 .nickname(findMember.getName())
                 .gender(findMember.getGender())
+                .lengthStatus(findMember.getLengthStatus())
                 .curlyStatus(findMember.getCurlyStatus())
                 .build();
     }
@@ -158,12 +160,13 @@ public class MemberService {
     public MyPageResponseDto getMyPageInfo(Long memberId){
 
         //1. Member를 조회한 후
-        Member findMember = getMember(memberId);
+        Member findMember = getMember(memberId, ACTIVE);
 
         //2. MyPagaeInfo 만 추출하여 -> 그대로 DTO로 변환하여 반환
         return MyPageResponseDto.builder()
                                 .nickname(findMember.getName())
                                 .gender(findMember.getGender())
+                                .lengthStatus(findMember.getLengthStatus())
                                 .curlyStatus(findMember.getCurlyStatus())
                                 .build();
     }

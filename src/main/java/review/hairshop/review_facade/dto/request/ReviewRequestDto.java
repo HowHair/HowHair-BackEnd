@@ -48,8 +48,7 @@ public class ReviewRequestDto {
     private Perm perm;
     @NotNull(message = "매직 종류 선택은 필수 입니다.")
     private Straightening straightening;
-    @NotNull(message = "다른 시술 종류 선택은 필수 입니다.")
-    private OtherSurgery otherSurgery;
+
     @NotNull(message = "머리 길이는 필수 입니다.")
     private LengthStatus lengthStatus;
 

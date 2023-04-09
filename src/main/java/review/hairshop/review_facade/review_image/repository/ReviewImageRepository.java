@@ -5,5 +5,7 @@ import org.springframework.stereotype.Repository;
 import review.hairshop.review_facade.review_image.ReviewImage;
 
 @Repository
-public interface ReviewImageRepository extends JpaRepository<ReviewImage, Long> {
+public interface ReviewImageRepository extends JpaRepository<ReviewImage, Long> , ReviewImageRepositoryCustom {
+
+    boolean existsByReviewId(Long reviewId);
 }
