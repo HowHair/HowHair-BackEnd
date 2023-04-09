@@ -8,7 +8,7 @@ import review.hairshop.review_facade.review.Review;
 import java.util.Optional;
 
 @Repository
-public interface ReviewRepository extends JpaRepository<Review, Long> {
+public interface ReviewRepository extends JpaRepository<Review, Long> , ReviewRepositoryCustom{
 
     Optional<Review> findByIdAndStatus(Long id, Status status);
 }

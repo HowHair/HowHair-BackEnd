@@ -3,10 +3,7 @@ package review.hairshop.review_facade.review;
 import lombok.*;
 import review.hairshop.bookmark.Bookmark;
 import review.hairshop.common.BasicEntity;
-import review.hairshop.common.enums.CurlyStatus;
-import review.hairshop.common.enums.LengthStatus;
-import review.hairshop.common.enums.RegYN;
-import review.hairshop.common.enums.Status;
+import review.hairshop.common.enums.*;
 import review.hairshop.common.enums.surgery.*;
 import review.hairshop.member.Member;
 import review.hairshop.review_facade.review_image.ReviewImage;
@@ -36,6 +33,9 @@ public class Review extends BasicEntity{
     private String designerName;
 
     @Enumerated(EnumType.STRING)
+    private Gender gender;
+
+    @Enumerated(EnumType.STRING)
     private LengthStatus lengthStatus;
 
     @Enumerated(EnumType.STRING)
@@ -55,9 +55,6 @@ public class Review extends BasicEntity{
 
     @Enumerated(EnumType.STRING)
     private Straightening straightening;
-
-    @Enumerated(EnumType.STRING)
-    private OtherSurgery otherSurgery;
 
     private int price;
 

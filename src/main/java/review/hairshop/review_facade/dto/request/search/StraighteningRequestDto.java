@@ -1,4 +1,4 @@
-package review.hairshop.member.dto.request;
+package review.hairshop.review_facade.dto.request.search;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,21 +7,20 @@ import lombok.Setter;
 import review.hairshop.common.enums.CurlyStatus;
 import review.hairshop.common.enums.Gender;
 import review.hairshop.common.enums.LengthStatus;
-
-
-import javax.validation.constraints.NotNull;
-
+import review.hairshop.common.enums.SurgeryDate;
+import review.hairshop.common.enums.surgery.Perm;
+import review.hairshop.common.enums.surgery.Straightening;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MyPageRequestDto {
-
-    @NotNull(message = "성별은 필수 값 입니다.")
+public class StraighteningRequestDto {
     private Gender gender;
-    @NotNull(message = "머리 길이는 필수 값 입니다.")
     private LengthStatus lengthStatus;
-    @NotNull(message = "곱슬 정도는 필수 값 입니다.")
     private CurlyStatus curlyStatus;
+    private SurgeryDate surgeryDate;
+    private Straightening straightening;
+    private int fromPrice;
+    private int toPrice;
 }

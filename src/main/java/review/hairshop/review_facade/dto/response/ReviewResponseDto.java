@@ -1,10 +1,7 @@
 package review.hairshop.review_facade.dto.response;
 
 import lombok.*;
-import review.hairshop.common.enums.CurlyStatus;
-import review.hairshop.common.enums.Gender;
-import review.hairshop.common.enums.LengthStatus;
-import review.hairshop.common.enums.RegYN;
+import review.hairshop.common.enums.*;
 import review.hairshop.common.enums.surgery.*;
 
 import java.time.LocalDate;
@@ -34,9 +31,10 @@ public class ReviewResponseDto {
     private Dyeing dyeing;
     private Perm perm;
     private Straightening straightening;
-    private OtherSurgery otherSurgery;
+
     private int numOfBookmark;
     private RegYN regYN;
+    private BookmarkYN bookmarkYN;
 
     private Gender gender;
     private String memberName;

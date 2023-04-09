@@ -36,7 +36,7 @@ public class FileServiceUtil {
     /**
      * 1. [file Original Name을 가지고 -> 실제 파일이 저장될 path들의 리스트를 생성하는 서비스]
      * */
-    public List<String> getPathList(ReviewParameterDto reviewParameterDto, Long reviewId){
+    public List<String> getPathList(List<MultipartFile> imageList, Long reviewId){
 
         //1. 오늘 날짜에 대한 url 앞부분을 만들기
         LocalDate now = LocalDate.now();
@@ -47,7 +47,7 @@ public class FileServiceUtil {
 
         //3. today와 reviewNumber 그리고 UUID 값 + 마지막으로 확장자를 더하여 -> 각 이미지가 저장될 원본 path를 만듦
 
-        return reviewParameterDto.getImageList().stream()
+        return imageList.stream()
                 .map(i -> "image" + File.separator + today + File.separator + reviewNumber + File.separator + UUID.randomUUID().toString().substring(0, 7) +
                         "." + FilenameUtils.getExtension(i.getOriginalFilename()))
                 .collect(Collectors.toList());

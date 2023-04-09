@@ -1,6 +1,7 @@
 package review.hairshop.bookmark;
 
 import lombok.*;
+import review.hairshop.common.BasicEntity;
 import review.hairshop.common.enums.Status;
 import review.hairshop.member.Member;
 import review.hairshop.review_facade.review.Review;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-public class Bookmark {
+public class Bookmark extends BasicEntity{
 
     @Id @GeneratedValue
     @Column(name = "bookmark_id")

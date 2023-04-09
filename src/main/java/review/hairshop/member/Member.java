@@ -34,6 +34,9 @@ public class Member extends BasicEntity {
     private Gender gender;
 
     @Enumerated(EnumType.STRING)
+    private LengthStatus lengthStatus;
+
+    @Enumerated(EnumType.STRING)
     private CurlyStatus curlyStatus;
 
     @Enumerated(EnumType.STRING)
@@ -49,13 +52,15 @@ public class Member extends BasicEntity {
      * [변경 메서드]
      * */
 
-    public void changeMemberInfo(Gender gender, CurlyStatus curlyStatus){
+    public void changeMemberInfo(Gender gender, LengthStatus lengthStatus, CurlyStatus curlyStatus){
 
         this.gender = gender;
+        this.lengthStatus = lengthStatus;
         this.curlyStatus= curlyStatus;
     }
 
-    public void changeMemberInfo(CurlyStatus curlyStatus){
+    public void changeMemberInfo(LengthStatus lengthStatus, CurlyStatus curlyStatus){
+        this.lengthStatus = lengthStatus;
         this.curlyStatus = curlyStatus;
     }
 
