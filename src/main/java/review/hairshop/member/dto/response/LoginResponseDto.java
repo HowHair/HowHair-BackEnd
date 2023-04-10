@@ -10,4 +10,6 @@ import review.hairshop.common.enums.Status;
 public class LoginResponseDto {
 
     private Status status;
+
+
 }
