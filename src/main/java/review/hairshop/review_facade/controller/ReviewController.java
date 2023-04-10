@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import review.hairshop.common.response.ApiResponse;
 import review.hairshop.review_facade.dto.ReviewParameterDto;
 import review.hairshop.review_facade.dto.request.HairShopRequestDto;
+import review.hairshop.review_facade.dto.request.ReviewIdRequestDto;
 import review.hairshop.review_facade.dto.request.ReviewRequestDto;
 import review.hairshop.review_facade.dto.request.search.*;
 import review.hairshop.review_facade.dto.response.DeleteReviewResponseDto;
@@ -62,9 +63,9 @@ public class ReviewController {
     /**
      * API.9 [특정 Review 제거 -> 실질적으로는 INACTIVE하게 만듦]
      */
-    @PatchMapping("/review/{reviewId}")
-    public ApiResponse<DeleteReviewResponseDto> patchReview(@RequestAttribute Long memberId, @PathVariable Long reviewId) {
-        return ApiResponse.success(reviewService.patchReview(memberId, reviewId));
+    @PatchMapping("/review")
+    public ApiResponse<DeleteReviewResponseDto> patchReview(@RequestAttribute Long memberId, @RequestBody ReviewIdRequestDto reviewIdRequestDto) {
+        return ApiResponse.success(reviewService.patchReview(memberId, reviewIdRequestDto.getReviewId()));
     }
 
 
