@@ -28,4 +28,6 @@ public class ReviewImage extends BasicEntity{
     @JoinColumn(name = "reveiw_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Review review;
+
+
 }

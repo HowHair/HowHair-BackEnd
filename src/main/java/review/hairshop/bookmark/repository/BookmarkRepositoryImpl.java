@@ -1,10 +1,7 @@
 package review.hairshop.bookmark.repository;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import org.hibernate.query.criteria.internal.expression.function.AggregationFunction;
 import org.springframework.data.domain.Pageable;
-import review.hairshop.bookmark.Bookmark;
-import review.hairshop.bookmark.QBookmark;
 import review.hairshop.common.enums.CurlyStatus;
 import review.hairshop.common.enums.Gender;
 import review.hairshop.common.enums.LengthStatus;
@@ -15,8 +12,6 @@ import review.hairshop.review_facade.dto.response.QReviewSummaryDto;
 import review.hairshop.review_facade.dto.response.ReviewSummaryDto;
 
 import javax.persistence.EntityManager;
-
-
 import java.util.List;
 
 import static review.hairshop.bookmark.QBookmark.bookmark;
@@ -37,7 +32,7 @@ public class BookmarkRepositoryImpl implements BookmarkRepositoryCustom{
                         review.hairCut, review.dyeing, review.perm, review.straightening, review.price))
                 .from(bookmark)
                 .join(bookmark.review, review)
-                .where(bookmark.member.id.eq(memberId), bookmark.status.eq(Status.ACTIVE))
+                .where(bookmark.member.id.eq(memberId), bookmark.status.eq(Status.ACTIVE), review.status.eq(Status.ACTIVE))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .orderBy(bookmark.createdAt.desc())

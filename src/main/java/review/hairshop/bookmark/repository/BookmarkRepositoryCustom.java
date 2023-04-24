@@ -1,11 +1,9 @@
 package review.hairshop.bookmark.repository;
 
 import org.springframework.data.domain.Pageable;
-import review.hairshop.bookmark.Bookmark;
 import review.hairshop.common.enums.CurlyStatus;
 import review.hairshop.common.enums.Gender;
 import review.hairshop.common.enums.LengthStatus;
-import review.hairshop.common.enums.Status;
 import review.hairshop.review_facade.dto.response.MainSummaryDto;
 import review.hairshop.review_facade.dto.response.ReviewSummaryDto;
 
@@ -22,7 +20,5 @@ public interface BookmarkRepositoryCustom {
     List<MainSummaryDto> findMainReviewList(Pageable pageable);
 
     List<MainSummaryDto> findMainTypeList(Gender gender, LengthStatus lengthStatus, CurlyStatus curlyStatus, Pageable pageable);
-
-
 
 }
