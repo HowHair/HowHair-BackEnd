@@ -133,7 +133,7 @@ public class MemberController {
         return ApiResponse.success(memberService.updateMyPage(memberId, myPageParameterDto));
     }
 
-    /** 배포테스트 */
+    /** 배포테스트 2*/
 
 
 
