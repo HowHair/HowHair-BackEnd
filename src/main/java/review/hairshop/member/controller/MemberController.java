@@ -38,6 +38,7 @@ public class MemberController {
     /**
      * [API 1.] : 로그인
      * */
+    @CrossOrigin(origins = "http://3.39.58.72:3000")
     @PostMapping("/login")
     public ApiResponse<LoginResponseDto> login(@Validated @RequestBody LoginRequestDto loginRequestDto, HttpServletRequest request){
 
@@ -64,7 +65,7 @@ public class MemberController {
     /**
      * [API 2.] : 로그아웃
      * */
-
+    @CrossOrigin(origins = "http://3.39.58.72:3000")
     @PostMapping("/logout")
     public ApiResponse<LogoutResponseDto> logout(HttpServletRequest request){
 
@@ -80,6 +81,7 @@ public class MemberController {
     /**
      * [API 3.] : 회원 탈퇴
      * */
+    @CrossOrigin(origins = "http://3.39.58.72:3000")
     @PatchMapping("/withdrawal")
     public ApiResponse<WithdrawalResponseDto> withdrawal(@RequestAttribute Long memberId, HttpServletRequest request){
 
@@ -98,6 +100,7 @@ public class MemberController {
     /**
      * [API 4.] : 로그인 직후 회원 정보 설정
      * */
+    @CrossOrigin(origins = "http://3.39.58.72:3000")
     @PatchMapping("/login/mypage")
     public ApiResponse<MyPageResponseDto> loginMyPage(@RequestAttribute Long memberId, @Validated @RequestBody MyPageRequestDto myPageRequestDto){
 
@@ -113,6 +116,7 @@ public class MemberController {
     /**
      * [API 5.] : 회원정보 조회
      * */
+    @CrossOrigin(origins = "http://3.39.58.72:3000")
     @GetMapping("/mypage")
     public ApiResponse<MyPageResponseDto> getMyPage(@RequestAttribute Long memberId){
 
@@ -122,6 +126,7 @@ public class MemberController {
     /**
      * [API 6.] : 회원 정보 수정
      * */
+    @CrossOrigin(origins = "http://3.39.58.72:3000")
     @PatchMapping("/mypage")
     public ApiResponse<MyPageResponseDto> patchMyPage(@RequestAttribute Long memberId, @Validated @RequestBody MyPageRequestDto myPageRequestDto){
 
@@ -133,7 +138,7 @@ public class MemberController {
         return ApiResponse.success(memberService.updateMyPage(memberId, myPageParameterDto));
     }
 
-    /** 배포테스트*/
+    /** 배포테스트  */
 
 
 

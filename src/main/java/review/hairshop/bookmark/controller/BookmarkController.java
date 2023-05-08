@@ -18,6 +18,7 @@ public class BookmarkController {
      * - 마약 다른사용자가 그 리뷰를 북마크 해서 - 한꺼번에 2가 증가하는 건 모여주면 안됨
      * - 그러려면 북마크 개수가 응답으로 나가면 안됨
      * */
+    @CrossOrigin(origins = "http://3.39.58.72:3000")
     @PostMapping("/bookmark")
     public ApiResponse postBookmark(@RequestAttribute Long memberId, @Validated @RequestBody BookmarkRequestDto bookmarkRequestDto){
         bookmarkService.doBookmark(memberId, bookmarkRequestDto.getReviewId());
